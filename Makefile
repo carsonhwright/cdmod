@@ -85,9 +85,11 @@
 # clean:
 # 	rm -rf *.o *~ core .depend *.mod.o .*.cmd *.ko *.mod.c .tmp_versions *.markers modules.order
 # endif
-
+ifneq ($(KERNELRELEASE),)
+# kbuild part of makefile
 obj-m += simple.o
 # CC := x86_64-linux-gnu-gcc-13
+else
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD  := $(shell pwd)
 BUILD_DIR := $(PWD)/build
@@ -97,3 +99,5 @@ all:
 
 clean:
 	$(MAKE) -C $(KDIR) M=$(PWD) MO=$(BUILD_DIR) clean
+
+endif
