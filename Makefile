@@ -88,6 +88,7 @@
 ifneq ($(KERNELRELEASE),)
 # kbuild part of makefile
 obj-m += simple.o
+# ccflags-y += -g
 # CC := x86_64-linux-gnu-gcc-13
 else
 KDIR := /lib/modules/$(shell uname -r)/build
@@ -99,5 +100,6 @@ all:
 
 clean:
 	$(MAKE) -C $(KDIR) M=$(PWD) MO=$(BUILD_DIR) clean
+	rm -rf build
 
 endif
